@@ -10,11 +10,11 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 8 x 8
-  Tiles                : 0 to 22
+  Tiles                : 0 to 30
 
-  Palette colors       : None.
+  Palette colors       : Included.
   SGB Palette          : None.
-  CGB Palette          : None.
+  CGB Palette          : 4 Bits per entry.
 
   Convert to metatiles : No.
 
@@ -24,8 +24,82 @@
 
 
 /* Bank of tiles. */
-#define bgBank 0
+#define backgroundBank 0
+
+/* Super Gameboy palette 0 */
+#define backgroundSGBPal0c0 6076
+#define backgroundSGBPal0c1 8935
+#define backgroundSGBPal0c2 6596
+#define backgroundSGBPal0c3 5344
+
+/* Super Gameboy palette 1 */
+#define backgroundSGBPal1c0 6076
+#define backgroundSGBPal1c1 8935
+#define backgroundSGBPal1c2 6596
+#define backgroundSGBPal1c3 5344
+
+/* Super Gameboy palette 2 */
+#define backgroundSGBPal2c0 6076
+#define backgroundSGBPal2c1 8935
+#define backgroundSGBPal2c2 6596
+#define backgroundSGBPal2c3 5344
+
+/* Super Gameboy palette 3 */
+#define backgroundSGBPal3c0 6076
+#define backgroundSGBPal3c1 8935
+#define backgroundSGBPal3c2 6596
+#define backgroundSGBPal3c3 5344
+
+/* Gameboy Color palette 0 */
+#define backgroundCGBPal0c0 32767
+#define backgroundCGBPal0c1 8935
+#define backgroundCGBPal0c2 6596
+#define backgroundCGBPal0c3 5344
+
+/* Gameboy Color palette 1 */
+#define backgroundCGBPal1c0 32301
+#define backgroundCGBPal1c1 32767
+#define backgroundCGBPal1c2 32390
+#define backgroundCGBPal1c3 0
+
+/* Gameboy Color palette 2 */
+#define backgroundCGBPal2c0 32301
+#define backgroundCGBPal2c1 7150
+#define backgroundCGBPal2c2 546
+#define backgroundCGBPal2c3 0
+
+/* Gameboy Color palette 3 */
+#define backgroundCGBPal3c0 6076
+#define backgroundCGBPal3c1 8935
+#define backgroundCGBPal3c2 6596
+#define backgroundCGBPal3c3 5344
+
+/* Gameboy Color palette 4 */
+#define backgroundCGBPal4c0 6076
+#define backgroundCGBPal4c1 8935
+#define backgroundCGBPal4c2 6596
+#define backgroundCGBPal4c3 5344
+
+/* Gameboy Color palette 5 */
+#define backgroundCGBPal5c0 6076
+#define backgroundCGBPal5c1 8935
+#define backgroundCGBPal5c2 6596
+#define backgroundCGBPal5c3 5344
+
+/* Gameboy Color palette 6 */
+#define backgroundCGBPal6c0 6076
+#define backgroundCGBPal6c1 8935
+#define backgroundCGBPal6c2 6596
+#define backgroundCGBPal6c3 5344
+
+/* Gameboy Color palette 7 */
+#define backgroundCGBPal7c0 6076
+#define backgroundCGBPal7c1 8935
+#define backgroundCGBPal7c2 6596
+#define backgroundCGBPal7c3 5344
+/* CGBpalette entries. */
+extern unsigned char backgroundCGB[];
 /* Start of tile array. */
-extern unsigned char bg[];
+extern unsigned char background[];
 
 /* End of BACKGROUND.H */

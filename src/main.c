@@ -32,15 +32,20 @@ const UWORD spritepalette[] = {
 };
 
 const UWORD bkgpalette[] = {
-    marioCGBPal0c0,
-    marioCGBPal0c1,
-    marioCGBPal0c2,
-    marioCGBPal0c3,
+    backgroundCGBPal0c0,
+    backgroundCGBPal0c1,
+    backgroundCGBPal0c2,
+    backgroundCGBPal0c3,
 
-    marioCGBPal1c0,
-    marioCGBPal1c1,
-    marioCGBPal1c2,
-    marioCGBPal1c3
+    backgroundCGBPal1c0,
+    backgroundCGBPal1c1,
+    backgroundCGBPal1c2,
+    backgroundCGBPal1c3,
+
+    backgroundCGBPal2c0,
+    backgroundCGBPal2c1,
+    backgroundCGBPal2c2,
+    backgroundCGBPal2c3,
 };
 
 /**
@@ -66,6 +71,19 @@ void initRole(UINT8 x, UINT8 y)
     role.y = y;
 }
 
+/**
+ * 休眠指定次数
+ */
+void performantdelay(UINT8 numloops)
+{
+    UINT8 i=0;
+    for (   ; i < numloops; i++)
+    {
+        wait_vbl_done();
+    }
+    
+}
+
 void main()
 {
     SPRITES_8x16;
@@ -76,14 +94,14 @@ void main()
     SHOW_SPRITES;
 
     //设置背景数据源
-    set_bkg_data(0,23,bg);
+    set_bkg_data(0,31,background);
     VBK_REG = 1;
     //加载背景数据
-    set_bkg_tiles(0,0,marioBgWidth,marioBgHeight,marioBgPLN1);
+    set_bkg_tiles(0,0,marioBGWidth,marioBGHeight,marioBGPLN1);
     VBK_REG = 0;
-    set_bkg_tiles(0,0,marioBgWidth,marioBgHeight,marioBgPLN0);
+    set_bkg_tiles(0,0,marioBGWidth,marioBGHeight,marioBGPLN0);
     //加载背景配色方案
-    set_bkg_palette(0, 2, bkgpalette);
+    set_bkg_palette(0, 3, bkgpalette);
     //调用显示背景方法
     SHOW_BKG;
     DISPLAY_ON;
@@ -91,14 +109,24 @@ void main()
     {
         if(joypad()==J_RIGHT)
         {
-            movegamecharacter(&role,role.x+2,role.y);
-            role.x +=2;
-            
+            // 当主角在屏幕中位置大于80时，不再移动主角只移动背景
+            if(role.x >80){
+                movegamecharacter(&role,role.x,role.y);
+                scroll_bkg(4,0);
+            }
+            else
+            {
+                movegamecharacter(&role,role.x+2,role.y);
+                role.x +=4;
+            }
         }
         else if(joypad()==J_LEFT)
         {
-            movegamecharacter(&role,role.x-2,role.y);
-            role.x -= 2 ;
+            // 限制主角返回之前的位置，只有主角在屏幕位置小于16时才可以进行向左移动
+            if(role.x>16){
+                movegamecharacter(&role,role.x-2,role.y);
+                role.x -= 2 ;
+            }
         }
         else 
         {
@@ -127,7 +155,7 @@ void main()
             set_sprite_prop(1,prop );
         }
         
-        delay(80);
+        performantdelay(5);
     }
     
 }

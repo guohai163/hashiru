@@ -7,7 +7,7 @@
  Info:
    Section       : 
    Bank          : 0
-   Map size      : 20 x 18
+   Map size      : 32 x 18
    Tile set      : C:\Users\Administrator\Downloads\backgound.gbr
    Plane count   : 2 planes (16 bits)
    Plane order   : Planes are continues
@@ -18,12 +18,12 @@
 
 */
 
-#define marioBgWidth 20
-#define marioBgHeight 18
-#define marioBgBank 0
+#define marioBGWidth 32
+#define marioBGHeight 18
+#define marioBGBank 0
 
-#define marioBg marioBgPLN0
-extern unsigned char marioBgPLN0[];
-extern unsigned char marioBgPLN1[];
+#define marioBG marioBGPLN0
+extern unsigned char marioBGPLN0[];
+extern unsigned char marioBGPLN1[];
 
 /* End of MARIO-BG.H */
