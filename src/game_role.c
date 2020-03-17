@@ -19,15 +19,15 @@ void movegamecharacter(struct GameRole* character, UINT8 x, UINT8 y)
 
     if(x<character->x && character->direction==2) {
         //向左移动
-        set_sprite_prop(character->spritids[0],S_FLIPX);
-        set_sprite_prop(character->spritids[1],S_FLIPX);
+        set_sprite_prop(character->spritids[0], get_sprite_prop(character->spritids[0]) | S_FLIPX);
+        set_sprite_prop(character->spritids[1], get_sprite_prop(character->spritids[1]) | S_FLIPX);
         character->direction = 4;
     }
 
     if(x>character->x && character->direction == 4) {
         //向右移动
-        set_sprite_prop(character->spritids[0],!(S_FLIPX));
-        set_sprite_prop(character->spritids[1],!(S_FLIPX));
+        set_sprite_prop(character->spritids[0],get_sprite_prop(character->spritids[0]) & 0xdfu);
+        set_sprite_prop(character->spritids[1],get_sprite_prop(character->spritids[1]) & 0xdfu);
         character->direction = 2;
     }
     //根据移动方向，移动精灵位置
