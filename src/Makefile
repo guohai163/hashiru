@@ -6,7 +6,7 @@ all:	$(BINS)
 %.o:	%.c
 	$(CC) -c -o $@ $<
 
-%.gb:	%.o
+%.gb:	main.o game_role.o
 	$(CC) -o $@ $^
 
 clean:
