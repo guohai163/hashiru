@@ -1,29 +1,60 @@
 #include <gb/gb.h>
 #include <stdio.h>
+#include "mario.c"
 
-unsigned char st[] =
-{
-  0x18,0x18,0x18,0x18,0x00,0x18,0x7E,0x7E,
-  0x18,0x18,0x18,0x18,0x24,0x24,0x42,0x42
-};
+UINT8 run_index = 0;
 
 void main()
 {
-    set_sprite_data(0, 9, st);
+    SPRITES_8x16;
+    set_sprite_data(0, 20, mario);
     set_sprite_tile(0, 0);
     move_sprite(0, 20, 20);
+    set_sprite_tile(1, 2);
+    move_sprite(1,20+8, 20);
     SHOW_SPRITES;
     while (1)
     {
         if(joypad()==J_RIGHT)
         {
+            set_sprite_tile(0, (run_index+4)*2);
+            set_sprite_tile(1, (run_index+4)*2+2);
+
             scroll_sprite(0, 2, 0);
+            scroll_sprite(1, 2, 0);
+            if(run_index==4)
+            {
+                run_index = 0;
+            }
+            else
+            {
+                run_index+=2;
+            }
+            
         }
-        if(joypad()==J_LEFT)
+        else if(joypad()==J_LEFT)
         {
+            set_sprite_tile(0, (run_index+4)*2);
+            set_sprite_tile(1, (run_index+4)*2+2);
+
             scroll_sprite(0, -2, 0);
+            scroll_sprite(1, -2, 0);
+
+            if(run_index==4)
+            {
+                run_index = 0;
+            }
+            else
+            {
+                run_index+=2;
+            }
         }
-        delay(50);
+        else 
+        {
+            set_sprite_tile(0, 0);
+            set_sprite_tile(1, 2);
+        }
+        delay(80);
     }
     
 }
