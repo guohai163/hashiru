@@ -10,7 +10,7 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 8 x 16
-  Tiles                : 0 to 9
+  Tiles                : 0 to 11
 
   Palette colors       : Included.
   SGB Palette          : None.
@@ -51,7 +51,7 @@
 #define marioSGBPal3c3 5344
 
 /* Gameboy Color palette 0 */
-#define marioCGBPal0c0 32767
+#define marioCGBPal0c0 6076
 #define marioCGBPal0c1 8935
 #define marioCGBPal0c2 6596
 #define marioCGBPal0c3 5344
@@ -66,19 +66,19 @@
 #define marioCGBPal2c0 6076
 #define marioCGBPal2c1 2783
 #define marioCGBPal2c2 6574
-#define marioCGBPal2c3 32767
+#define marioCGBPal2c3 704
 
 /* Gameboy Color palette 3 */
-#define marioCGBPal3c0 6076
+#define marioCGBPal3c0 32555
 #define marioCGBPal3c1 20255
 #define marioCGBPal3c2 307
 #define marioCGBPal3c3 0
 
 /* Gameboy Color palette 4 */
 #define marioCGBPal4c0 6076
-#define marioCGBPal4c1 8935
-#define marioCGBPal4c2 6596
-#define marioCGBPal4c3 5344
+#define marioCGBPal4c1 20223
+#define marioCGBPal4c2 307
+#define marioCGBPal4c3 0
 
 /* Gameboy Color palette 5 */
 #define marioCGBPal5c0 6076

@@ -2,7 +2,7 @@
 
 一个学习GB开发的事例项目
 
-![mario-run.gif](/img/mario-run.gif)
+![mario-run.gif](/img/goomba-2.gif)
 
 ### 课程列表
 

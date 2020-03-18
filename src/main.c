@@ -13,6 +13,10 @@ UINT8 falsh_index = 1;
 //定义角色
 struct GameRole role;
 
+//障碍
+struct GameRole goomba;
+
+
 const UWORD spritepalette[] = {
 
     marioCGBPal1c0,
@@ -55,6 +59,8 @@ void initRole(UINT8 x, UINT8 y)
 {
     role.x = 0;
     role.y = 0;
+    role.width = 10;
+    role.height = 16;
     role.spritrun[0] = 8;
     role.spritrun[1] = 12;
     role.spritrun[2] = 16;
@@ -69,6 +75,29 @@ void initRole(UINT8 x, UINT8 y)
     movegamecharacter(&role,x,y);
     role.x = x;
     role.y = y;
+}
+
+/**
+ * 初始化板栗仔
+ */
+void initGoomba(UINT8 x, UINT8 y)
+{
+    goomba.x = 0;
+    goomba.y = 0;
+    goomba.width = 10;
+    goomba.height = 16;
+    goomba.spritrun[0] = 20;
+    goomba.spite_run_status = 0;
+    goomba.spritids[0] = 2;
+    goomba.spritids[1] = 3;
+    set_sprite_tile(goomba.spritids[0], goomba.spritrun[goomba.spite_run_status]);
+    set_sprite_tile(goomba.spritids[1], goomba.spritrun[goomba.spite_run_status]+2);
+    movegameobstacle(&goomba,x,y);
+    set_sprite_prop(2,2);
+    set_sprite_prop(3,2);
+    goomba.x = x;
+    goomba.y = y;
+    goomba.direction = 2;
 }
 
 /**
@@ -87,10 +116,11 @@ void performantdelay(UINT8 numloops)
 void main()
 {
     SPRITES_8x16;
-    set_sprite_data(0, 20, mario);
+    set_sprite_data(0, 24, mario);
     //引入调色板数据
     set_sprite_palette(0, 3, spritepalette);
     initRole(28,112);
+    initGoomba(180, 112);
     SHOW_SPRITES;
 
     //设置背景数据源
@@ -105,9 +135,11 @@ void main()
     //调用显示背景方法
     SHOW_BKG;
     DISPLAY_ON;
-    while (1)
+    while (!checkcollisions(&role, &goomba))
     {
-        if(joypad()==J_RIGHT)
+        movegameobstacle(&goomba, goomba.x-2, goomba.y);
+        goomba.x -=2 ;
+        if(joypad() & J_RIGHT)
         {
             // 当主角在屏幕中位置大于80时，不再移动主角只移动背景
             if(role.x >80){
@@ -116,16 +148,17 @@ void main()
             }
             else
             {
-                movegamecharacter(&role,role.x+2,role.y);
+                movegamecharacter(&role,role.x+4,role.y);
                 role.x +=4;
             }
+            
         }
-        else if(joypad()==J_LEFT)
+        else if(joypad() & J_LEFT)
         {
             // 限制主角返回之前的位置，只有主角在屏幕位置小于16时才可以进行向左移动
             if(role.x>16){
-                movegamecharacter(&role,role.x-2,role.y);
-                role.x -= 2 ;
+                movegamecharacter(&role,role.x-4,role.y);
+                role.x -= 4 ;
             }
         }
         else 
@@ -137,6 +170,7 @@ void main()
         {
             falsh_switch = falsh_switch?FALSE:TRUE;
         }
+
         if(falsh_switch)
         {
             UINT8 prop = get_sprite_prop(0);
@@ -157,5 +191,6 @@ void main()
         
         performantdelay(5);
     }
+    printf("\n \n \n \n \n \n \n === GAME  OVER ===");
     
 }

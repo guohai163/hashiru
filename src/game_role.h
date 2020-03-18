@@ -19,6 +19,10 @@ struct GameRole
     //精灵的面部朝向
     //1上，2右，3下，4左。我们这次只用左右和即可
     UINT8 direction;
+
+    // 精灵的宽和高用于碰撞检测
+    UINT8 width;
+    UINT8 height;
 };
 
 //单个精灵瓦块的宽度
@@ -28,3 +32,11 @@ UINT8 sprite_size = 8;
  * 移动精灵方法，我们要在.c文件中实现的
  */
 void movegamecharacter(struct GameRole* character, UINT8 x, UINT8 y);
+/**
+ * 移动障碍物
+ */
+void movegameobstacle(struct GameRole* character, UINT8 x, UINT8 y);
+/**
+ * 两个精灵的碰撞检测
+ */
+UBYTE checkcollisions(struct GameRole* one, struct GameRole* two);

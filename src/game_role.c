@@ -43,3 +43,42 @@ void movegamecharacter(struct GameRole* character, UINT8 x, UINT8 y)
         }
     }
 }
+
+/**
+ * 障碍物的移动
+ */
+void movegameobstacle(struct GameRole* character, UINT8 x, UINT8 y)
+{
+    // 反复交替板栗仔的左右朝向，让板栗仔有一种左右踏脚的感觉
+    if(character->direction == 2)
+    {
+        set_sprite_prop(character->spritids[0], get_sprite_prop(character->spritids[0]) | S_FLIPX);
+        set_sprite_prop(character->spritids[1], get_sprite_prop(character->spritids[1]) | S_FLIPX);
+        character->direction = 4;
+    }
+    else
+    {
+        set_sprite_prop(character->spritids[0],get_sprite_prop(character->spritids[0]) & 0xdfu);
+        set_sprite_prop(character->spritids[1],get_sprite_prop(character->spritids[1]) & 0xdfu);
+        character->direction = 2;
+    }
+    // 镜像后需要交替左右两个半截的位置
+    if(character->direction ==2){
+        move_sprite(character->spritids[0], x , y);
+        move_sprite(character->spritids[1], x + sprite_size, y);
+    }
+    else if (character->direction == 4)
+    {
+        move_sprite(character->spritids[0], x+sprite_size, y);
+        move_sprite(character->spritids[1], x , y);
+    }
+
+}
+
+/**
+ * 碰撞检查函数
+ */
+UBYTE checkcollisions(struct GameRole* one, struct GameRole* two)
+{
+    return (one->x >= two->x && one->x <= two->x + two->width) && (one->y >= two->y && one->y <= two->y + two->height) || (two->x >= one->x && two->x <= one->x + one->width) && (two->y >= one->y && two->y <= one->y + one->height);
+}
